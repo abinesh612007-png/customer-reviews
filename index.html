@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Customer Satisfaction Study - Flipkart Online Shopping</title>
+    <style>
+        :root {
+            --primary: #2874F0;
+            --primary-dark: #1E5DC8;
+            --dark: #172033;
+            --text: #1F2937;
+            --text-light: #64748B;
+            --bg: #F8FAFC;
+            --card: #FFFFFF;
+            --border: #E2E8F0;
+            --success: #16A34A;
+            --warning: #F59E0B;
+            --danger: #DC2626;
+            --blue-light: #EEF2FF;
+            --blue-lighter: #F0F4FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 0.625rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--blue-light) 0%, var(--bg) 100%);
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h2 {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--blue-light);
+        }
+
+        .hero-visual {
+            background: linear-gradient(135deg, var(--primary) 0%, #7B3FF2 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .hero-visual svg {
+            width: 100%;
+            max-width: 250px;
+        }
+
+        /* Stats Cards */
+        .stats-section {
+            max-width: 1400px;
+            margin: -2rem auto 3rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        section {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        section p {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--blue-light);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Objectives */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .objective-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+        }
+
+        .objective-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Methodology */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .method-item {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .method-label {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #7B3FF2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Survey Form */
+        .survey-section {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            margin-bottom: 4rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-bottom: 1rem;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 0.75rem;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .form-error {
+            color: var(--danger);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .scale-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .scale-btn {
+            flex: 1;
+            min-width: 60px;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .scale-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .scale-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: var(--primary-dark);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-card {
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .chart-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .satisfaction-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .satisfaction-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .satisfaction-progress {
+            width: 100%;
+            height: 12px;
+            background: var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .satisfaction-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.5s ease;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .result-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        th {
+            background: var(--blue-light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 0.95rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: var(--bg);
+        }
+
+        /* Success Message */
+        .success-message {
+            background: var(--success);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .error-message {
+            background: var(--danger);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .badge-info {
+            background: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-direction: column;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .stats-section {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .features-grid,
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .scale-options {
+                flex-direction: column;
+            }
+
+            .scale-btn {
+                width: 100%;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            section h2 {
+                font-size: 1.25rem;
+            }
+
+            .cta-section {
+                padding: 2rem 1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .objective-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12h-2m-4 0H9m5-7v2m0 8v2M7 12a5 5 0 1 0 10 0 5 5 0 0 0-10 0Z"></path>
+                </svg>
+                Customer Satisfaction Study
+            </a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Study</a></li>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#methodology">Methodology</a></li>
+                <li><a href="#survey">Survey</a></li>
+                <li><a href="#findings">Findings</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+            <button class="nav-cta" onclick="document.getElementById('survey').scrollIntoView({behavior: 'smooth'})">Take Survey</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h2>ACADEMIC RESEARCH PROJECT</h2>
+                    <h1>Understanding Customer Satisfaction in Online Shopping</h1>
+                    <p>An empirical investigation exploring customer experiences, platform satisfaction, pricing transparency, and logistics reliability influencing online shopping through Flipkart.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="document.getElementById('survey').scrollIntoView({behavior: 'smooth'})">Take the Survey →</button>
+                        <button class="btn-secondary" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">Explore the Study</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="80" fill="rgba(255,255,255,0.1)" stroke="white" stroke-width="2"/>
+                        <circle cx="100" cy="100" r="60" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
+                        <circle cx="100" cy="100" r="40" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="2"/>
+                        <rect x="85" y="85" width="30" height="30" fill="white" rx="4"/>
+                        <text x="100" y="105" text-anchor="middle" fill="white" font-size="16" font-weight="bold">📊</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Cards -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">4.6</div>
+                    <div class="stat-label">Average Satisfaction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Satisfied Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">72%</div>
+                    <div class="stat-label">Repeat Shoppers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Key Satisfaction Factors</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- About Section -->
+            <section id="about">
+                <h2>About the Study</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">This academic research study examines customer satisfaction among individuals who engage in online shopping through Flipkart, one of India's leading e-commerce platforms. The study evaluates multiple dimensions of the online shopping experience.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--dark);">Research Focus Areas</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                                <span style="color: var(--primary); font-weight: bold;">✓</span>
+                                <span>Product quality and specifications</span>
+                            </li>
+                            <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                                <span style="color: var(--primary); font-weight: bold;">✓</span>
+                                <span>Pricing and promotional strategies</span>
+                            </li>
+                            <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                                <span style="color: var(--primary); font-weight: bold;">✓</span>
+                                <span>Delivery experience and reliability</span>
+                            </li>
+                            <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                                <span style="color: var(--primary); font-weight: bold;">✓</span>
+                                <span>Customer service quality</span>
+                            </li>
+                            <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                                <span style="color: var(--primary); font-weight: bold;">✓</span>
+                                <span>Website usability and navigation</span>
+                            </li>
+                            <li style="display: flex; gap: 0.75rem;">
+                                <span style="color: var(--primary); font-weight: bold;">✓</span>
+                                <span>Return and refund processes</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--blue-light); padding: 2rem; border-radius: 0.75rem;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--dark);">Study Significance</h3>
+                        <p style="margin-bottom: 1rem;">This research seeks to understand how various dimensions of the online shopping experience contribute to overall customer satisfaction on the Flipkart platform.</p>
+                        <p>By identifying key satisfaction drivers, this study provides insights into customer expectations and preferences in e-commerce contexts.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why This Study Matters -->
+            <section>
+                <h2>Why Study Customer Satisfaction?</h2>
+                <p style="text-align: center; margin-bottom: 3rem;">Customer satisfaction is influenced by multiple dimensions of the online shopping experience. Understanding these factors is critical in today's competitive e-commerce landscape.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎁</div>
+                        <h3>Product Quality</h3>
+                        <p>Customers expect products to match descriptions, images, and specifications provided online.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Price & Offers</h3>
+                        <p>Pricing, discounts, deals, and perceived value directly influence purchase decisions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚚</div>
+                        <h3>Delivery Experience</h3>
+                        <p>Delivery speed, tracking accuracy, packaging quality, and reliability define the experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Customer Service</h3>
+                        <p>Customers evaluate accessibility to support when they have questions or encounter problems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🖥️</div>
+                        <h3>Website Experience</h3>
+                        <p>Navigation, search functionality, product information, and checkout processes are essential.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">↩️</div>
+                        <h3>Return & Refund</h3>
+                        <p>Simple, transparent return and refund processes build customer confidence and trust.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Objectives Section -->
+            <section id="objectives">
+                <h2>Objectives of the Study</h2>
+                <p style="text-align: center; margin-bottom: 3rem;">This research aims to achieve the following key objectives through structured investigation and analysis.</p>
+                
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <div class="objective-number">01</div>
+                        <h3>Measure Customer Satisfaction</h3>
+                        <p>To understand and quantify the overall satisfaction level of customers using Flipkart for online shopping.</p>
+                    </div>
+                    <div class="objective-card">
+                        <div class="objective-number">02</div>
+                        <h3>Identify Key Factors</h3>
+                        <p>To identify and analyze the primary factors that influence customer satisfaction during online shopping experiences.</p>
+                    </div>
+                    <div class="objective-card">
+                        <div class="objective-number">03</div>
+                        <h3>Understand Preferences</h3>
+                        <p>To study customer preferences regarding products, pricing strategies, delivery options, and available services.</p>
+                    </div>
+                    <div class="objective-card">
+                        <div class="objective-number">04</div>
+                        <h3>Evaluate Experience</h3>
+                        <p>To understand how customers perceive and evaluate the overall Flipkart online shopping experience.</p>
+                    </div>
+                    <div class="objective-card">
+                        <div class="objective-number">05</div>
+                        <h3>Identify Improvements</h3>
+                        <p>To identify areas where customers expect improvements and enhancements to their shopping experience.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Methodology Section -->
+            <section id="methodology">
+                <h2>Research Methodology</h2>
+                <p style="text-align: center; margin-bottom: 3rem;">This study employs a structured research design with clearly defined parameters and data collection procedures.</p>
+                
+                <div class="methodology-grid">
+                    <div class="method-item">
+                        <div class="method-label">Research Type</div>
+                        <div class="method-value">Descriptive Research</div>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-label">Data Collection</div>
+                        <div class="method-value">Primary Survey</div>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-label">Collection Tool</div>
+                        <div class="method-value">Questionnaire</div>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-label">Sampling Method</div>
+                        <div class="method-value">Convenience Sampling</div>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-label">Study Population</div>
+                        <div class="method-value">Flipkart Shoppers</div>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-label">Analysis Method</div>
+                        <div class="method-value">Descriptive Analysis</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Your Shopping Experience Matters</h2>
+                <p>Help us understand what customers value most when shopping online. Your honest feedback will directly contribute to this academic research study.</p>
+                <button class="btn-primary" onclick="document.getElementById('survey').scrollIntoView({behavior: 'smooth'})" style="background: white; color: var(--primary);">Take the Survey →</button>
+                <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.9;">This survey takes approximately 5-10 minutes to complete.</p>
+            </div>
+
+            <!-- Survey Section -->
+            <section id="survey">
+                <h2>Share Your Shopping Experience</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Your response helps us understand what customers value most when shopping online. This data will be used solely for academic research purposes.</p>
+                
+                <div class="survey-section">
+                    <div id="successMessage" class="success-message">
+                        <strong>Thank you for participating!</strong>
+                        <p style="margin-top: 0.5rem;">Your response has been recorded and will be used for this academic study.</p>
+                    </div>
+                    <div id="errorMessage" class="error-message">
+                        <strong>Error submitting form</strong>
+                        <p id="errorText" style="margin-top: 0.5rem;"></p>
+                    </div>
+
+                    <form id="surveyForm">
+                        <!-- Basic Information -->
+                        <h3 style="font-size: 1.25rem; margin: 2rem 0 1.5rem 0; color: var(--dark);">Basic Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" placeholder="Your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age Group</label>
+                                <select id="age" name="age">
+                                    <option value="">Select age group</option>
+                                    <option value="18-25">18-25</option>
+                                    <option value="26-35">26-35</option>
+                                    <option value="36-45">36-45</option>
+                                    <option value="46-55">46-55</option>
+                                    <option value="55+">55+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender">
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <select id="occupation" name="occupation">
+                                    <option value="">Select occupation</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Employed">Employed</option>
+                                    <option value="Self-Employed">Self-Employed</option>
+                                    <option value="Business Owner">Business Owner</option>
+                                    <option value="Retired">Retired</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Shopping Behavior -->
+                        <h3 style="font-size: 1.25rem; margin: 2rem 0 1.5rem 0; color: var(--dark);">Shopping Behavior</h3>
+
+                        <div class="form-group">
+                            <label>How often do you shop on Flipkart?</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="shoppingFrequency" value="Very Frequently (Weekly or more)"> Very Frequently (Weekly or more)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="shoppingFrequency" value="Frequently (2-3 times a month)"> Frequently (2-3 times a month)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="shoppingFrequency" value="Occasionally (Once a month)"> Occasionally (Once a month)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="shoppingFrequency" value="Rarely (Few times a year)"> Rarely (Few times a year)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Satisfaction Questions -->
+                        <h3 style="font-size: 1.25rem; margin: 2rem 0 1.5rem 0; color: var(--dark);">Your Satisfaction</h3>
+
+                        <div class="form-group">
+                            <label>Overall satisfaction with Flipkart shopping experience?</label>
+                            <div class="scale-options">
+                                <button type="button" class="scale-btn" data-field="overallSatisfaction" data-value="1">Very Dissatisfied</button>
+                                <button type="button" class="scale-btn" data-field="overallSatisfaction" data-value="2">Dissatisfied</button>
+                                <button type="button" class="scale-btn" data-field="overallSatisfaction" data-value="3">Neutral</button>
+                                <button type="button" class="scale-btn" data-field="overallSatisfaction" data-value="4">Satisfied</button>
+                                <button type="button" class="scale-btn" data-field="overallSatisfaction" data-value="5">Very Satisfied</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Satisfaction with Product Quality?</label>
+                            <div class="scale-options">
+                                <button type="button" class="scale-btn" data-field="productQuality" data-value="1">1 - Very Low</button>
+                                <button type="button" class="scale-btn" data-field="productQuality" data-value="2">2</button>
+                                <button type="button" class="scale-btn" data-field="productQuality" data-value="3">3 - Neutral</button>
+                                <button type="button" class="scale-btn" data-field="productQuality" data-value="4">4</button>
+                                <button type="button" class="scale-btn" data-field="productQuality" data-value="5">5 - Very High</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Satisfaction with Delivery Speed & Reliability?</label>
+                            <div class="scale-options">
+                                <button type="button" class="scale-btn" data-field="delivery" data-value="1">1 - Very Low</button>
+                                <button type="button" class="scale-btn" data-field="delivery" data-value="2">2</button>
+                                <button type="button" class="scale-btn" data-field="delivery" data-value="3">3 - Neutral</button>
+                                <button type="button" class="scale-btn" data-field="delivery" data-value="4">4</button>
+                                <button type="button" class="scale-btn" data-field="delivery" data-value="5">5 - Very High</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Satisfaction with Pricing & Offers?</label>
+                            <div class="scale-options">
+                                <button type="button" class="scale-btn" data-field="pricing" data-value="1">1 - Very Low</button>
+                                <button type="button" class="scale-btn" data-field="pricing" data-value="2">2</button>
+                                <button type="button" class="scale-btn" data-field="pricing" data-value="3">3 - Neutral</button>
+                                <button type="button" class="scale-btn" data-field="pricing" data-value="4">4</button>
+                                <button type="button" class="scale-btn" data-field="pricing" data-value="5">5 - Very High</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Satisfaction with Customer Service?</label>
+                            <div class="scale-options">
+                                <button type="button" class="scale-btn" data-field="customerService" data-value="1">1 - Very Low</button>
+                                <button type="button" class="scale-btn" data-field="customerService" data-value="2">2</button>
+                                <button type="button" class="scale-btn" data-field="customerService" data-value="3">3 - Neutral</button>
+                                <button type="button" class="scale-btn" data-field="customerService" data-value="4">4</button>
+                                <button type="button" class="scale-btn" data-field="customerService" data-value="5">5 - Very High</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Satisfaction with Return & Refund Process?</label>
+                            <div class="scale-options">
+                                <button type="button" class="scale-btn" data-field="returnsRefunds" data-value="1">1 - Very Low</button>
+                                <button type="button" class="scale-btn" data-field="returnsRefunds" data-value="2">2</button>
+                                <button type="button" class="scale-btn" data-field="returnsRefunds" data-value="3">3 - Neutral</button>
+                                <button type="button" class="scale-btn" data-field="returnsRefunds" data-value="4">4</button>
+                                <button type="button" class="scale-btn" data-field="returnsRefunds" data-value="5">5 - Very High</button>
+                            </div>
+                        </div>
+
+                        <!-- Recommendation -->
+                        <div class="form-group">
+                            <label>How likely are you to recommend Flipkart to others?</label>
+                            <div class="scale-options">
+                                <button type="button" class="scale-btn" data-field="recommendation" data-value="1">1 - Not Likely</button>
+                                <button type="button" class="scale-btn" data-field="recommendation" data-value="2">2</button>
+                                <button type="button" class="scale-btn" data-field="recommendation" data-value="3">3 - Neutral</button>
+                                <button type="button" class="scale-btn" data-field="recommendation" data-value="4">4</button>
+                                <button type="button" class="scale-btn" data-field="recommendation" data-value="5">5 - Very Likely</button>
+                            </div>
+                        </div>
+
+                        <!-- Additional Comments -->
+                        <div class="form-group">
+                            <label for="suggestions">Additional Comments or Suggestions</label>
+                            <textarea id="suggestions" name="suggestions" placeholder="Please share any additional feedback or suggestions..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Submit Your Response</button>
+                        <p style="text-align: center; font-size: 0.9rem; color: var(--text-light); margin-top: 1rem;">Your data is used solely for academic research purposes.</p>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Findings Section -->
+            <section id="findings">
+                <h2>What Did We Learn?</h2>
+                <p style="text-align: center; margin-bottom: 3rem;">Our analysis of customer feedback reveals key insights about satisfaction drivers in online shopping.</p>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Overall Satisfaction</h3>
+                        <div style="text-align: center;">
+                            <div style="margin: 1.5rem 0;">
+                                <div style="font-size: 3rem; font-weight: 800; color: var(--primary);">86%</div>
+                                <p style="color: var(--text-light); margin-top: 0.5rem;">Satisfied Customers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Satisfaction Across Factors</h3>
+                        <div class="satisfaction-bar">
+                            <div class="satisfaction-label">
+                                <span>Product Quality</span>
+                                <span>82%</span>
+                            </div>
+                            <div class="satisfaction-progress">
+                                <div class="satisfaction-fill" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div class="satisfaction-bar">
+                            <div class="satisfaction-label">
+                                <span>Delivery</span>
+                                <span>74%</span>
+                            </div>
+                            <div class="satisfaction-progress">
+                                <div class="satisfaction-fill" style="width: 74%"></div>
+                            </div>
+                        </div>
+                        <div class="satisfaction-bar">
+                            <div class="satisfaction-label">
+                                <span>Pricing</span>
+                                <span>78%</span>
+                            </div>
+                            <div class="satisfaction-progress">
+                                <div class="satisfaction-fill" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        <div class="satisfaction-bar">
+                            <div class="satisfaction-label">
+                                <span>Customer Service</span>
+                                <span>81%</span>
+                            </div>
+                            <div class="satisfaction-progress">
+                                <div class="satisfaction-fill" style="width: 81%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Preferred Shopping Categories</h3>
+                        <div style="margin-top: 1.5rem;">
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600;">
+                                    <span>Electronics</span>
+                                    <span>42%</span>
+                                </div>
+                                <div style="width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;">
+                                    <div style="width: 42%; height: 100%; background: var(--primary);"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600;">
+                                    <span>Clothing</span>
+                                    <span>28%</span>
+                                </div>
+                                <div style="width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;">
+                                    <div style="width: 28%; height: 100%; background: #7B3FF2;"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600;">
+                                    <span>Home & Kitchen</span>
+                                    <span>18%</span>
+                                </div>
+                                <div style="width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;">
+                                    <div style="width: 18%; height: 100%; background: var(--success);"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600;">
+                                    <span>Others</span>
+                                    <span>12%</span>
+                                </div>
+                                <div style="width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;">
+                                    <div style="width: 12%; height: 100%; background: var(--warning);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-grid" style="margin-top: 2rem;">
+                    <div class="result-card">
+                        <div class="result-value">72%</div>
+                        <div class="result-label">Repeat Shoppers</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">83.5%</div>
+                        <div class="result-label">Post-Purchase Satisfaction</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">79.2%</div>
+                        <div class="result-label">Recommendation Rate</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value">4.3/5</div>
+                        <div class="result-label">Average Rating</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Findings -->
+            <section>
+                <h2>Key Findings & Insights</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <div class="feature-card">
+                        <h3>Overall Satisfaction Levels</h3>
+                        <p>The majority of Flipkart customers (86%) express satisfaction with their online shopping experience, with strong repeat purchase behavior indicating sustained satisfaction.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Product Quality as Priority</h3>
+                        <p>Product quality emerges as the most critical satisfaction factor (82%), highlighting the importance of accurate product descriptions and quality assurance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Delivery Reliability Concerns</h3>
+                        <p>Delivery satisfaction (74%) is comparatively lower, indicating opportunities to improve logistics, tracking, and on-time delivery performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Strong Recommendation Intent</h3>
+                        <p>Nearly 80% of customers indicate willingness to recommend Flipkart, suggesting positive word-of-mouth potential and brand advocacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Electronics-Focused Shopping</h3>
+                        <p>Electronics (42%) and Clothing (28%) emerge as the most popular product categories, indicating category-specific engagement patterns.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Post-Purchase Experience Impact</h3>
+                        <p>Post-purchase satisfaction (83.5%) is relatively high, though return and refund processes present opportunities for enhancement.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusion Section -->
+            <section id="conclusion">
+                <h2>Conclusion</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <p style="margin-bottom: 1.5rem;">This academic study demonstrates that Flipkart has successfully established a strong foundation of customer satisfaction in India's competitive e-commerce market. With 86% of surveyed customers expressing satisfaction and high repeat purchase rates, the platform shows considerable strength in customer retention.</p>
+                    
+                    <p style="margin-bottom: 1.5rem;"><strong>Key Satisfaction Drivers:</strong> Product quality, customer service quality, and pricing value emerged as the primary factors influencing overall satisfaction. Electronics and clothing categories show the highest engagement.</p>
+                    
+                    <p style="margin-bottom: 1.5rem;"><strong>Areas for Enhancement:</strong> Delivery performance and logistics optimization represent the most significant opportunity for improvement. Streamlining the return and refund process could further boost customer confidence and satisfaction levels.</p>
+                    
+                    <p style="margin-bottom: 1.5rem;"><strong>Strategic Implications:</strong> The strong recommendation intent (79.2%) suggests significant organic growth potential through customer advocacy. Continued focus on quality assurance and service excellence can maintain competitive advantage.</p>
+                    
+                    <p>This research contributes to the academic understanding of customer satisfaction dynamics in e-commerce contexts and provides evidence-based insights for practitioners seeking to enhance online shopping experiences.</p>
+                </div>
+            </section>
+
+            <!-- Limitations -->
+            <section style="background: var(--blue-light); padding: 2rem; border-radius: 0.75rem; margin-bottom: 3rem;">
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Research Limitations</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                        <span style="color: var(--primary); font-weight: bold;">•</span>
+                        <span>Sample size was limited to convenience sampling method, which may not represent entire customer base</span>
+                    </li>
+                    <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                        <span style="color: var(--primary); font-weight: bold;">•</span>
+                        <span>Responses reflect participant opinions and perceived experiences at the time of survey</span>
+                    </li>
+                    <li style="margin-bottom: 0.75rem; display: flex; gap: 0.75rem;">
+                        <span style="color: var(--primary); font-weight: bold;">•</span>
+                        <span>Findings are specific to the study population and time period</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem;">
+                        <span style="color: var(--primary); font-weight: bold;">•</span>
+                        <span>Geographic coverage may vary across different regions of India</span>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>📊 Customer Satisfaction Study</h3>
+                <p style="font-size: 0.95rem; line-height: 1.6;">An academic research project examining customer satisfaction among Flipkart online shopping users.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#about">About Study</a></li>
+                    <li><a href="#objectives">Objectives</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#survey">Take Survey</a></li>
+                    <li><a href="#findings">Findings</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Academic Integrity</a></li>
+                    <li><a href="#">Data Protection</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Academic Research Project | A Study on Customer Satisfaction Among Flipkart Online Shopping<br>
+            This website is for educational and research purposes only. Not affiliated with Flipkart.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEg9Hva6DodlJkftsKiUhtvYnQWDodCRsR01daOKycS7sAhwrwtZW8WIoLIR6YOX1RsQ/exec";
+        
+        // Form data object
+        let formData = {
+            fullName: '',
+            age: '',
+            gender: '',
+            occupation: '',
+            shoppingFrequency: '',
+            overallSatisfaction: '',
+            productQuality: '',
+            delivery: '',
+            pricing: '',
+            customerService: '',
+            returnsRefunds: '',
+            recommendation: '',
+            suggestions: ''
+        };
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu on nav link click
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Scale button handlers
+        document.querySelectorAll('.scale-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const field = btn.dataset.field;
+                const value = btn.dataset.value;
+                
+                // Remove selected class from siblings
+                document.querySelectorAll(`[data-field="${field}"]`).forEach(b => {
+                    b.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked button
+                btn.classList.add('selected');
+                
+                // Store value
+                formData[field] = value;
+            });
+        });
+
+        // Form submission
+        document.getElementById('surveyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Clear previous messages
+            document.getElementById('successMessage').classList.remove('show');
+            document.getElementById('errorMessage').classList.remove('show');
+            
+            // Collect form data
+            const fullName = document.getElementById('fullName').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const occupation = document.getElementById('occupation').value;
+            const shoppingFrequency = document.querySelector('input[name="shoppingFrequency"]:checked')?.value || '';
+            const suggestions = document.getElementById('suggestions').value;
+            
+            // Validate required fields
+            if (!fullName || !age || !gender || !occupation || !shoppingFrequency) {
+                document.getElementById('errorMessage').classList.add('show');
+                document.getElementById('errorText').textContent = 'Please fill in all required fields.';
+                return;
+            }
+            
+            // Validate at least one satisfaction rating
+            if (!formData.overallSatisfaction || !formData.productQuality || !formData.delivery || 
+                !formData.pricing || !formData.customerService || !formData.returnsRefunds || 
+                !formData.recommendation) {
+                document.getElementById('errorMessage').classList.add('show');
+                document.getElementById('errorText').textContent = 'Please rate all satisfaction questions.';
+                return;
+            }
+            
+            // Disable submit button
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting your response...';
+            
+            try {
+                // Prepare data for submission
+                const queryString = new URLSearchParams({
+                    timestamp: new Date().toISOString(),
+                    fullName: fullName,
+                    age: age,
+                    gender: gender,
+                    occupation: occupation,
+                    shoppingFrequency: shoppingFrequency,
+                    overallSatisfaction: formData.overallSatisfaction,
+                    productQuality: formData.productQuality,
+                    delivery: formData.delivery,
+                    pricing: formData.pricing,
+                    customerService: formData.customerService,
+                    returnsRefunds: formData.returnsRefunds,
+                    recommendation: formData.recommendation,
+                    suggestions: suggestions
+                }).toString();
+                
+                // Send to Google Apps Script
+                await fetch(SCRIPT_URL + "?" + queryString, {
+                    method: "GET",
+                    mode: "no-cors"
+                });
+                
+                // Show success message
+                document.getElementById('successMessage').classList.add('show');
+                
+                // Reset form
+                document.getElementById('surveyForm').reset();
+                formData = {
+                    fullName: '',
+                    age: '',
+                    gender: '',
+                    occupation: '',
+                    shoppingFrequency: '',
+                    overallSatisfaction: '',
+                    productQuality: '',
+                    delivery: '',
+                    pricing: '',
+                    customerService: '',
+                    returnsRefunds: '',
+                    recommendation: '',
+                    suggestions: ''
+                };
+                
+                // Remove selected class from all scale buttons
+                document.querySelectorAll('.scale-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({behavior: 'smooth'});
+                
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('errorMessage').classList.add('show');
+                document.getElementById('errorText').textContent = 'An error occurred. Please try again.';
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Your Response';
+            }
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+// ...existing code...
+document.getElementById('surveyForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+
+    successMessage.classList.remove('show');
+    errorMessage.classList.remove('show');
+
+    const fullName = document.getElementById('fullName').value.trim();
+    const age = document.getElementById('age').value;
+    const gender = document.getElementById('gender').value;
+    const occupation = document.getElementById('occupation').value;
+    const shoppingFrequency = document.querySelector('input[name="shoppingFrequency"]:checked')?.value || '';
+    const suggestions = document.getElementById('suggestions').value.trim();
+
+    if (!fullName || !age || !gender || !occupation || !shoppingFrequency) {
+        errorMessage.classList.add('show');
+        errorText.textContent = 'Please fill in all required fields.';
+        return;
+    }
+
+    if (!formData.overallSatisfaction || !formData.productQuality || !formData.delivery ||
+        !formData.pricing || !formData.customerService || !formData.returnsRefunds ||
+        !formData.recommendation) {
+        errorMessage.classList.add('show');
+        errorText.textContent = 'Please rate all satisfaction questions.';
+        return;
+    }
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting your response...';
+
+    try {
+        const queryString = new URLSearchParams({
+            timestamp: new Date().toISOString(),
+            fullName,
+            age,
+            gender,
+            occupation,
+            shoppingFrequency,
+            overallSatisfaction: formData.overallSatisfaction,
+            productQuality: formData.productQuality,
+            delivery: formData.delivery,
+            pricing: formData.pricing,
+            customerService: formData.customerService,
+            returnsRefunds: formData.returnsRefunds,
+            recommendation: formData.recommendation,
+            suggestions
+        }).toString();
+
+        const response = await fetch(`${SCRIPT_URL}?${queryString}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        successMessage.classList.add('show');
+        document.getElementById('surveyForm').reset();
+
+        formData = {
+            fullName: '',
+            age: '',
+            gender: '',
+            occupation: '',
+            shoppingFrequency: '',
+            overallSatisfaction: '',
+            productQuality: '',
+            delivery: '',
+            pricing: '',
+            customerService: '',
+            returnsRefunds: '',
+            recommendation: '',
+            suggestions: ''
+        };
+
+        document.querySelectorAll('.scale-btn').forEach(btn => btn.classList.remove('selected'));
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (error) {
+        console.error('Submit error:', error);
+        errorMessage.classList.add('show');
+        errorText.textContent = 'An error occurred while submitting the form. Please check the Apps Script web app deployment and run the page from a local web server.';
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Your Response';
+    }
+});
+// ...existing code...

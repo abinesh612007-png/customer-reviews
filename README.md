@@ -199,7 +199,7 @@ customer-satisfaction-flipkart/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+git clone https://github.com/abinesh612007/customer-reviewa.git
 ```
 
 ### 2. Open the Project
@@ -356,9 +356,15 @@ Possible improvements include:
 
 ## 👨‍💻 Author
 
-**Your Name**
+M.ABINESHVAR
 
-GitHub: `https://github.com/YOUR-USERNAME`
+GitHub: `https://github.com/abinesh612007
+
+url
+
+
+file:///F:/customer%20review/framework/index%20(1).html
+
 
 ---
 
